@@ -28,7 +28,9 @@ Remarques:
 
 Un inconvénient du programme précédent vient du fait que la condition initiale (position et orientation initiale) est toujours la même. Cela ne permet pas de garantir que le comportement obtenu sera efficace dans une autre situation. 
 
-En partant du programme précédent (créez un fichier _randomsearch2.py_), modifier le code afin que chaque comportement soit évalué _3_ fois, en tirant aléatoirement l'orientation initiale à chaque fois (vous pouvez modifier la fonction *reset*). Le score d'un comportement sera la somme de ces 3 évaluations.
+En partant du programme précédent (créez un fichier _randomsearch2.py_), modifier le code afin que chaque comportement soit évalué _3_ fois, chacune avec une orientation initiale différente (vous pouvez modifier la fonction *reset*). Le score d'un comportement sera la somme de ces 3 évaluations.
+
+Il est important que les solutions candidates soient _comparables_. Cela implique que les trois orientations initiales utilisées doivent rester les mêmes pour chaque nouveau jeu de paramètre. Pour cela, tirez au hasard ou fixez à la main l'orientation pour chacune des trois conditions initiales.
 
 Remarque: 
 * vous pouvez aussi, si vous le souhaitez, faire varier la position de départ (éviter de positionner votre robot dans un mur).

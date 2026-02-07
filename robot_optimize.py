@@ -14,10 +14,10 @@ class Robot_player(Robot):
     param = []
     bestParam = []
     it_per_evaluation = 400
-    trial = 1000
+    trial = 0
     meilleur_score = float("-inf")
     current_score = float("-inf")
-    meilleur_individu 
+    meilleur_individu = []
 
     x_0 = 0
     y_0 = 0
@@ -45,13 +45,13 @@ class Robot_player(Robot):
         # - la fonction de controle est une combinaison linéaire des senseurs, pondérés par les paramètres (c'est un "Perceptron")
 
         # toutes les X itérations: le robot est remis à sa position initiale de l'arène avec une orientation aléatoire
-        if self.iteration % self.it_per_evaluation == 0:
-                if self.trial == 500 :
+        if self.iteration % self.it_per_evaluation == 0 and self.trial <=500:
+                if self.trial == 500:
                     self.param = self.meilleur_individu
-                    self.trial = self.trial + 1
                     print ("Trying strategy no.",self.trial)
                     self.iteration = self.iteration + 1
-                    return 0, 0, True # ask for reset
+                    self.trial += 1
+                    return 0, 0, True
 
                 if self.current_score > self.meilleur_score :
                     self.meilleur_score = self.current_score
@@ -71,7 +71,7 @@ class Robot_player(Robot):
         translation = math.tanh ( self.param[0] + self.param[1] * sensors[sensor_front_left] + self.param[2] * sensors[sensor_front] + self.param[3] * sensors[sensor_front_right] )
         rotation = math.tanh ( self.param[4] + self.param[5] * sensors[sensor_front_left] + self.param[6] * sensors[sensor_front] + self.param[7] * sensors[sensor_front_right] )
         if self.trial < 500 :
-            self.current_score += self.log_sum_of_translation*abs(1 - self.log_sum_of_rotation)
+            self.current_score += self.log_sum_of_translation*(1-abs(self.log_sum_of_rotation))
 
         if debug == True:
             if self.iteration % 100 == 0:
